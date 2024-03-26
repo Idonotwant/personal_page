@@ -30,11 +30,17 @@ function App() {
   //     </p>
   //   </>
   // )
+  interface Comment {
+    name: string;
+    message: string;
+  }
+  const initialComment: Comment = {
+    name: "",
+    message: "",
+  };
   const [page, setPage] = useState(0);
-  const [comments, setComments] = useState(
-    /** @type {{name: string, message: string}[]} */ []
-  );
-  const [formInput, setFormInput] = useState({ name: "", message: "" });
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [formInput, setFormInput] = useState<Comment>(initialComment);
   const [nViewers, setNViewers] = useState(0);
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
   const handleFormInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
@@ -47,7 +53,7 @@ function App() {
   };
   /** @type {React.FormEventHandler<HTMLFormElement>} */
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    setComments((prev: never[]) => [...prev, formInput] as never[]);
+    setComments((prev: Comment[]) => [...prev, formInput] as Comment[]);
     setFormInput({ name: "", message: "" });
     event.preventDefault();
   };
@@ -58,14 +64,14 @@ function App() {
     localStorage.setItem("pageVisits", (initialCount + 0.5).toString());
   }, []);
   return (
-    <div class="bg-cyberBase h-screen">
-      <div class="flex flex-row w-full h-10 border-b-2 border-cyberSub py-1">
-        <button name="titleButton" class="cursor-auto text-cyberSub px-3">
+    <div className="bg-cyberBase h-screen">
+      <div className="flex flex-row w-full h-10 border-b-2 border-cyberSub py-1">
+        <button name="titleButton" className="cursor-auto text-cyberSub px-3">
           網路攻防實習
         </button>
         <button
           name="aboutButton"
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-cyberSub border-l-2 px-3"
+          className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-cyberSub border-l-2 px-3"
           onClick={() => {
             setPage(0);
           }}
@@ -74,7 +80,7 @@ function App() {
         </button>
         <button
           name="chatButton"
-          class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-cyberSub border-l-2 px-3"
+          className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 text-cyberSub border-l-2 px-3"
           onClick={() => {
             setPage(1);
           }}
@@ -83,34 +89,34 @@ function App() {
         </button>
         <button
           name="nViewersButton"
-          class="cursor-auto text-cyberSub border-l-2 px-3"
+          className="cursor-auto text-cyberSub border-l-2 px-3"
         >
           瀏覽人數: {nViewers}
         </button>
       </div>
       {page === 0 ? (
         <>
-          <div class="flex flex-row w-full h-5/6 py-5 bg-cyberSub">
-            <div class="pr-5 border-r-2 h-full w-1/5">
-              <img src={myself} class=""></img>
+          <div className="flex flex-row w-full h-5/6 py-5 bg-cyberSub">
+            <div className="pr-5 border-r-2 h-full w-1/5">
+              <img src={myself} className=""></img>
             </div>
 
-            <div class="pl-3 text-cyberBase">
+            <div className="pl-3 text-cyberBase">
               大家好，我是陳威儒，目前為臺灣大學電機系大四生。
             </div>
           </div>
-          <div name="toolFrame" class="flex flex-row">
+          <div className="flex flex-row">
             <a
               href="https://vitejs.dev"
               target="_blank"
-              class="px-6 pt-6 hover:animate-bounce"
+              className="px-6 pt-6 hover:animate-bounce"
             >
               <img src={viteLogo} className="logo" alt="Vite logo" />
             </a>
             <a
               href="https://react.dev"
               target="_blank"
-              class="px-6 pt-6 hover:animate-bounce"
+              className="px-6 pt-6 hover:animate-bounce"
             >
               <img src={reactLogo} className="logo react" alt="React logo" />
             </a>
@@ -118,10 +124,10 @@ function App() {
         </>
       ) : (
         <>
-          <div class="w-full h-5/6 snap-y">
-            <p class="text-cyberAccent">Write comments below</p>
+          <div className="w-full h-5/6 snap-y">
+            <p className="text-cyberAccent">Write comments below</p>
             <form
-              class="bg-cyberAccent w-full mx-3"
+              className="bg-cyberAccent w-full mx-3"
               onSubmit={handleFormSubmit}
             >
               <input
@@ -132,24 +138,24 @@ function App() {
               />
               <input
                 name="message"
-                class="w-2/3"
+                className="w-2/3"
                 value={formInput.message}
                 placeholder="message"
                 onChange={handleFormInputChange}
               />
-              <input type="submit" value="Submit" class="self-end" />
+              <input type="submit" value="Submit" className="self-end" />
             </form>
             {comments.map((comment, index) => (
               <div
                 key={index}
-                class="rounded-tl-lg bg-cyberSub mx-3 mt-3 min-h-20"
+                className="rounded-tl-lg bg-cyberSub mx-3 mt-3 min-h-20"
               >
                 {comment.name === "" ? (
-                  <p class="mx-2 border-b-2">unknown</p>
+                  <p className="mx-2 border-b-2">unknown</p>
                 ) : (
-                  <p class="mx-2 border-b-2">{comment.name}</p>
+                  <p className="mx-2 border-b-2">{comment.name}</p>
                 )}
-                <p class="mx-2">{comment.message}</p>
+                <p className="mx-2">{comment.message}</p>
               </div>
             ))}
           </div>
