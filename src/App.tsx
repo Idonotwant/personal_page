@@ -61,7 +61,7 @@ function App() {
     const storedCount = localStorage.getItem("pageVisits");
     const initialCount = Number(storedCount) || 0;
     setNViewers(initialCount + 1);
-    localStorage.setItem("pageVisits", initialCount.toString());
+    localStorage.setItem("pageVisits", (initialCount + 1).toString());
   }, []);
   return (
     <div className="bg-cyberBase h-screen">
