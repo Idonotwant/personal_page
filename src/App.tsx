@@ -40,8 +40,6 @@ function App() {
   const handleFormInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { name, value },
   }) => {
-    // const { name, value } = event.target
-    // obj = { ...prev }; obj[name] = value
     setFormInput((prev) => ({
       ...prev,
       [name]: value,
@@ -49,7 +47,7 @@ function App() {
   };
   /** @type {React.FormEventHandler<HTMLFormElement>} */
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    setComments((prev) => [...prev, formInput]);
+    setComments((prev: never[]) => [...prev, formInput] as never[]);
     setFormInput({ name: "", message: "" });
     event.preventDefault();
   };
@@ -57,7 +55,7 @@ function App() {
     const storedCount = localStorage.getItem("pageVisits");
     const initialCount = Number(storedCount) || 0;
     setNViewers(Math.ceil(initialCount + 1));
-    localStorage.setItem("pageVisits", initialCount + 0.5);
+    localStorage.setItem("pageVisits", (initialCount + 0.5).toString());
   }, []);
   return (
     <div class="bg-cyberBase h-screen">
