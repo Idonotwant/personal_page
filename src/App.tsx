@@ -59,10 +59,7 @@ function App() {
   }, []);
   return (
     <div class="bg-cyberBase h-screen">
-      <div
-        name="menuFrame"
-        class="flex flex-row w-full h-10 border-b-2 border-cyberSub py-1"
-      >
+      <div class="flex flex-row w-full h-10 border-b-2 border-cyberSub py-1">
         <button name="titleButton" class="cursor-auto text-cyberSub px-3">
           網路攻防實習
         </button>
@@ -93,15 +90,12 @@ function App() {
       </div>
       {page === 0 ? (
         <>
-          <div
-            name="aboutContentFrame"
-            class="flex flex-row w-full h-5/6 py-5 bg-cyberSub"
-          >
-            <div name="picFrame" class="pr-5 border-r-2 h-full w-1/5">
+          <div class="flex flex-row w-full h-5/6 py-5 bg-cyberSub">
+            <div class="pr-5 border-r-2 h-full w-1/5">
               <img src={myself} class=""></img>
             </div>
 
-            <div name="bioFrame" class="pl-3 text-cyberBase">
+            <div class="pl-3 text-cyberBase">
               大家好，我是陳威儒，目前為臺灣大學電機系大四生。
             </div>
           </div>
