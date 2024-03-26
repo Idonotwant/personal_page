@@ -60,8 +60,8 @@ function App() {
   useEffect(() => {
     const storedCount = localStorage.getItem("pageVisits");
     const initialCount = Number(storedCount) || 0;
-    setNViewers(Math.ceil(initialCount + 1));
-    localStorage.setItem("pageVisits", (initialCount + 0.5).toString());
+    setNViewers(initialCount + 1);
+    localStorage.setItem("pageVisits", initialCount.toString());
   }, []);
   return (
     <div className="bg-cyberBase h-screen">
